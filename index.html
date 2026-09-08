@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Projeto Tradutor V1 — protótipo PWA de interpretação por voz.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>Projeto Tradutor — V1</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PROJETO TRADUTOR</p>
+        <h1>Intérprete de voz</h1>
+      </div>
+      <span id="statusPill" class="status-pill offline">Parado</span>
+    </header>
+
+    <section class="hero card">
+      <div class="hero-copy">
+        <span class="badge">V1 • protótipo</span>
+        <h2>Conversa sem ficar apertando botões.</h2>
+        <p>Capta a fala pelo microfone do telemóvel ou de um fone Bluetooth e transforma voz em texto. A camada de tradução/IA fica separada para ser trocada depois.</p>
+      </div>
+      <button id="startBtn" class="primary-btn" type="button">▶ Iniciar conversa</button>
+    </section>
+
+    <section class="grid">
+      <article class="card panel">
+        <div class="panel-title">
+          <h3>Entrada de áudio</h3>
+          <span id="micIndicator" class="dot"></span>
+        </div>
+        <label for="inputDevice">Microfone</label>
+        <select id="inputDevice" aria-label="Microfone"></select>
+        <p class="hint">No Bluetooth, o sistema operacional pode controlar qual microfone fica ativo. Selecionamos o dispositivo disponível quando o navegador permitir.</p>
+
+        <label for="direction">Direção da conversa</label>
+        <select id="direction">
+          <option value="en-pt">Inglês → Português</option>
+          <option value="pt-en">Português → Inglês</option>
+          <option value="auto">Automática (experimental)</option>
+        </select>
+      </article>
+
+      <article class="card panel">
+        <div class="panel-title">
+          <h3>Resposta</h3>
+          <span id="speakerIndicator" class="dot"></span>
+        </div>
+
+        <div class="speed-row">
+          <button id="slowerBtn" class="secondary-btn" type="button">− Mais lento</button>
+          <span id="speedValue">1,0×</span>
+          <button id="fasterBtn" class="secondary-btn" type="button">+ Mais rápido</button>
+        </div>
+
+        <label class="switch-row">
+          <input id="speakToggle" type="checkbox" checked>
+          <span>Falar a tradução automaticamente</span>
+        </label>
+
+        <label class="switch-row">
+          <input id="essentialToggle" type="checkbox">
+          <span>Modo “só o essencial”</span>
+        </label>
+      </article>
+    </section>
+
+    <section class="card conversation">
+      <div class="conversation-head">
+        <div>
+          <h3>Conversa</h3>
+          <p id="conversationHint">Aguardando início.</p>
+        </div>
+        <button id="clearBtn" class="ghost-btn" type="button">Limpar</button>
+      </div>
+
+      <div id="messages" class="messages" aria-live="polite">
+        <div class="empty-state">
+          <div class="empty-icon">🎧</div>
+          <strong>Pronto para testar</strong>
+          <span>Toque em “Iniciar conversa” e fale perto do microfone.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card command-card">
+      <div>
+        <p class="eyebrow">COMANDOS DE VOZ</p>
+        <h3>O app também obedece à conversa.</h3>
+        <p class="hint">Exemplos: “repete”, “mais devagar”, “mais rápido”, “só o essencial”, “pausa” e “retoma”.</p>
+      </div>
+    </section>
+
+    <section class="card manual-card">
+      <div class="manual-head">
+        <div>
+          <p class="eyebrow">TESTE MANUAL</p>
+          <h3>Simular uma fala</h3>
+        </div>
+      </div>
+      <textarea id="manualText" rows="3" placeholder="Escreve uma frase aqui para testar a camada de interpretação..."></textarea>
+      <div class="manual-actions">
+        <button id="manualTranslateBtn" class="primary-btn" type="button">Interpretar</button>
+        <button id="manualSpeakBtn" class="secondary-btn" type="button">🔊 Falar resultado</button>
+      </div>
+      <p id="providerNote" class="hint"></p>
+    </section>
+
+    <footer>
+      <span>Projeto Tradutor V1</span>
+      <span id="onlineState">Verificando ligação…</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
